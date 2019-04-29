@@ -29,7 +29,10 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 
 ======================================================================
-MY STUFF
+MY STUFF for adding component and service
 ======================================================================
 ng generate component users
 ng generate service user
+npm install font-awesome --save
+do changes in polyfills.ts
+install d3

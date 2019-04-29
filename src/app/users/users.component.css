@@ -1,0 +1,378 @@
+text.users {
+    font-size: 15px;
+    fill: rgb(230, 18, 18);
+    stroke: rgb(16, 192, 16);
+    text-anchor: start;
+}
+
+rect.users {
+    fill: rgb(127, 238, 201);
+    stroke: magenta;
+    stroke-width: 3px;
+    opacity: 0.5;
+    shape-rendering: crispEdges;
+}
+
+rect.users.over {
+    fill: rgb(127, 238, 201);
+    stroke: magenta;
+    stroke-width: 3px;
+    opacity: 1;
+    shape-rendering: crispEdges;
+}
+
+text.tooltipRadar {
+    font-size: 30px;
+}
+
+text.legendRadar.left {
+    font-size: 10px;
+    fill: rgb(51, 51, 51);
+    text-anchor: start;
+    text-align: right;
+}
+
+text.legendRadar.right {
+    font-size: 10px;
+    fill: rgb(51, 51, 51);
+    text-anchor: end;
+    text-align: left;
+}
+
+text.legendRadar {
+    font-size: 10px;
+    fill: rgb(51, 51, 51);
+    text-anchor: middle;
+    text-align: center;
+}
+
+text.axisRadar {
+    font-size: 15px;
+    font-stretch: expanded;
+    fill: black;
+    text-anchor: start;
+    text-align: center;
+}
+
+text.topdates {
+    font-size: 10px;
+    font-weight: normal;
+    fill: rgb(84, 83, 79);
+    stroke-width: 10px;
+}
+
+circle.gridCircle {
+    fill: rgb(255, 155, 97);
+    stroke: rgba(255, 155, 97, 0.25);
+}
+
+path.gridZero {
+    fill: black;
+    stroke: black;
+    stroke-dasharray: 15, 15;
+    stroke-width: 5px;
+}
+
+line.line {
+    stroke: rgb(248, 230, 230);
+    stroke-width: 1.5px;
+    background-color: azure;
+}
+
+.leafy {
+    color: green;
+    font-size: 45px;
+}
+
+.toolTip {
+    position: absolute;
+    text-align: center;
+    padding: 2px;
+    font: 25px Calibri, sans-serif;
+    background: black;
+    color: white;
+    border: 10px;
+    border-radius: 8px;
+    pointer-events: none;
+}
+
+.rim {
+    fill: none;
+    stroke: orangered;
+}
+
+text.axisLabel {
+    stroke-width: 0.5px;
+    font-size: 25px;
+    text-anchor: middle;
+    fill: rgba(211, 127, 56, 0.74);
+}
+
+text.axisNames {
+    stroke-width: 0.5px;
+    font-size: 10px;
+    text-anchor: end;
+    fill: rgb(123, 168, 99);
+}
+
+text.axis {
+    stroke-width: 4px;
+    font-size: 25px;
+}
+
+rect.barrim {
+    opacity: 0;
+    fill: rgb(234, 240, 197);
+}
+
+rect.weightSinglePlus {
+    fill: rgb(37, 175, 213);
+    fill-opacity: 0.35;
+}
+
+rect.weightSinglePlus.over {
+    fill: rgb(37, 175, 213);
+    fill-opacity: 1;
+}
+
+rect.weightSingleMinus {
+    fill: rgba(231, 127, 121, 1);
+    fill-opacity: 0.35;
+}
+
+rect.weightSingleMinus.over {
+    fill: rgba(231, 127, 121, 1);
+    fill-opacity: 1;
+}
+
+text.meters {
+    font-size: 20px;
+    fill: rgb(51, 51, 51);
+    text-anchor: middle;
+    text-align: left;
+}
+
+text.factorlabels {
+    font-size: 20px;
+    fill: rgb(51, 51, 51);
+    text-anchor: middle;
+    text-align: center;
+}
+
+text.newvals {
+    font-size: 30px;
+    fill: rgb(47, 128, 117);
+    text-anchor: middle;
+    text-align: left;
+}
+
+text.rmessage {
+    font-size: 13px;
+    fill: rgb(23, 47, 128);
+    text-anchor: start;
+}
+
+text.correlations {
+    font-size: 13px;
+    fill: rgb(23, 47, 128);
+}
+
+rect.correlations {
+    fill: rgb(220, 223, 70);
+}
+
+rect.correlations.neg {
+    fill: rgb(223, 17, 17);
+}
+
+rect.correlations.pos {
+    fill: rgb(65, 223, 17);
+}
+
+path.correlations.neg {
+    fill: rgb(223, 17, 17);
+}
+
+path.correlations.pos {
+    fill: rgb(65, 223, 17);
+}
+
+text.fbetas {
+    font-size: 15px;
+    fill: black;
+    text-anchor: middle;
+}
+
+text.factorLabels {
+    font-size: 15px;
+    fill: black;
+    text-anchor: start;
+}
+
+text.stockLabels {
+    font-size: 12px;
+    fill: black;
+    text-anchor: end;
+}
+
+.fbetas.neg {
+    fill: rgb(223, 17, 17);
+    fill-opacity: 0.3;
+}
+
+.fbetas.pos {
+    fill: rgb(65, 223, 17);
+    fill-opacity: 0.3;
+}
+
+.totals.neg {
+    fill: rgb(223, 17, 17);
+    fill-opacity: 0.4;
+}
+
+.totals.pos {
+    fill: rgb(32, 10, 233);
+    fill-opacity: 0.4;
+}
+
+.totals.neg.select {
+    fill:rgb(252, 40, 3);
+    fill-opacity: 1;
+}
+
+.totals.pos.select {
+    fill:rgb(6, 97, 150);
+    fill-opacity: 1;
+}
+
+.totals.over {
+    fill-opacity: 0.7;
+}
+
+.total.neg {
+    fill: rgb(223, 17, 17);
+    fill-opacity: 0.7;
+}
+
+.total.pos {
+    fill: rgb(32, 10, 233);
+    fill-opacity: 0.7;
+}
+
+rect.meterbackground {
+    stroke: rgb(216, 195, 4);
+    fill: url(#grad);
+    fill-opacity: 0.53;
+}
+
+stop.top {
+    stop-color: rgb(160, 216, 194);
+}
+
+stop.middle {
+    stop-color: rgb(216, 160, 194);
+}
+
+stop.middle1 {
+    stop-color: rgb(216, 194, 160);
+}
+
+stop.bottom {
+    stop-color: rgb(160, 194, 216);
+}
+
+rect.five {
+    stroke: black;
+    fill: none;
+    stroke-width: 3px;
+}
+
+circle.five {
+    stroke: yellow;
+    fill: none;
+    stroke-width: 3px;
+}
+
+text.five {
+    font-size: 30px;
+    fill: black;
+    text-anchor: middle;
+}
+
+path.newfive.Pass {
+    fill: rgb(118, 113, 113);
+    stroke-width: 1px;
+}
+
+path.newfive.Warning {
+    fill: rgb(255, 192, 0);
+    stroke-width: 1px;
+}
+
+path.newfive.Fail {
+    fill: rgb(255, 21, 21);
+    stroke-width: 1px;
+}
+
+circle.newfive {
+    stroke: black;
+    fill: none;
+    stroke-width: 3px;
+}
+
+text.newfive {
+    font-size: 25px;
+    fill: #757171;
+    text-anchor: middle;
+}
+
+text.over {
+    font-size: 35px;
+    stroke: rgb(156, 150, 150);
+    fill: rgb(125, 231, 148);
+}
+
+text.rmessage.over {
+    font-size: 19px;
+    stroke: rgb(156, 150, 150);
+    fill: rgb(125, 231, 148);
+}
+
+text.users.over {
+    font-size: 20px;
+    stroke: rgb(156, 150, 150);
+    fill: rgb(125, 231, 148);
+}
+
+.dscale {
+    fill: none;
+    stroke: orange;
+}
+
+.choose {
+    fill: rgb(35, 56, 177);
+    stroke: orange;
+}
+
+path.meters {
+    stroke: green;
+    fill: none;
+}
+
+input.field {
+    background-color: rgb(234, 162, 29);
+    color: rgb(28, 33, 103);
+    font-size: 20px;
+}
+
+.portfolioFlower {
+    fill-opacity: 0.35;
+}
+
+.portfolioFlower.over {
+    fill-opacity: 0.75;
+}
+
+.portfolioFlower.dim {
+    fill-opacity: 0.05;
+}
