@@ -36,3 +36,8 @@ ng generate service user
 npm install font-awesome --save
 do changes in polyfills.ts
 install d3
+Add these to tslint.json
+    "one-variable-per-declaration":false,
+    "no-angle-bracket-type-assertion":false,
+    "whitespace":false,
+    "align":false
