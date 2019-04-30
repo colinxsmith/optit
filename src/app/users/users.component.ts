@@ -3,7 +3,8 @@ import { AppComponent } from '../app.component';
 import { UserService } from '../user.service';
 import * as d3 from 'd3';
 import { map } from 'rxjs/operators';
-import { isObject } from 'util';
+import { headersToString } from 'selenium-webdriver/http';
+import { isNumber, isObject } from 'util';
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
@@ -450,14 +451,13 @@ export class UsersComponent implements OnChanges {
               }
             });
           }
-
           const ww = 500, hh = 500, margin = { top: hh / 8, right: ww / 8, bottom: hh / 8, left: ww / 8 },
             width = ww - margin.left - margin.right,
             height = hh - margin.top - margin.bottom,
             radarBlobColour = d3.scaleOrdinal<number, string>().range(['rgb(255,50,50)', 'rgb(50,255,50)',
               'rgb(255,255,50)', 'rgb(50,255,255)']),
             radarChartOptions = {
-              w: width, h: height, margin, maxValue: 0,
+              w: width, h: height, margin: margin, maxValue: 0,
               levels: 3, roundStrokes: !joinLinear, colour: radarBlobColour
             };
           this.RadarChart('app-users', displayData, radarChartOptions);
@@ -474,14 +474,13 @@ export class UsersComponent implements OnChanges {
               }
             });
           }
-
           const ww = 500, hh = 500, margin = { top: hh / 8, right: ww / 8, bottom: hh / 8, left: ww / 8 },
             width = ww - margin.left - margin.right,
             height = hh - margin.top - margin.bottom,
             radarBlobColour = d3.scaleOrdinal<number, string>().range(['rgb(255,50,50)', 'rgb(50,255,50)',
               'rgb(255,255,50)', 'rgb(50,255,255)']),
             radarChartOptions = {
-              w: width, h: height, margin, maxValue: 0,
+              w: width, h: height, margin: margin, maxValue: 0,
               levels: 4, roundStrokes: !joinLinear, colour: radarBlobColour
             };
 
@@ -533,14 +532,13 @@ export class UsersComponent implements OnChanges {
           const FC: number[] = this.displayData[0].FC;
           const factorsOff = this.displayData.length === 2 ? this.displayData[1].factors : this.displayData[0].factors;
           const svgFactorX = this.factorX(factorsOff, 200);
-
           const margin = { top: 40, right: 40, bottom: 40, left: 40 }, ww = 400, hh = 400,
             width = ww - margin.left - margin.right,
             height = hh - margin.top - margin.bottom,
             radarBlobColour = d3.scaleOrdinal<number, string>().range(['rgb(255,50,50)', 'rgb(50,255,50)',
               'rgb(255,255,50)', 'rgb(50,255,255)']),
             options = {
-              w: width, h: height, margin, maxValue: 0,
+              w: width, h: height, margin: margin, maxValue: 0,
               levels: 4, roundStrokes: !joinLinear, colour: radarBlobColour
             };
           if (this.displayData.length === 2) {
@@ -620,13 +618,10 @@ export class UsersComponent implements OnChanges {
   }
   matrixFLorFX(dataIndex: number, weights: { w: number, name: string }[],
     factorBetas: number[], fNames: string[], totals = 0, w = 960, h = 960, id = 'app-users') {
-
     const nRow = weights.length + totals, nfac = factorBetas.length / weights.length, nCol = nfac + totals,
       margin = { top: 250, right: 10, bottom: 10, left: 100 };
-
     let width = w - margin.left - margin.right,
       height = h - margin.top - margin.bottom;
-
     const spacer = 10, rotateAngle = -45,
       squareSide = Math.min(width / nCol, height / nRow) - spacer, Side = squareSide + spacer;
     height = (squareSide + spacer) * nRow;
@@ -642,7 +637,6 @@ export class UsersComponent implements OnChanges {
       totalsCol[Math.floor(i / weights.length)] += d;
       sumEx += d;
     });
-
     const svgBase = d3.select(id).attr('class', 'main').append('svg')
       .attr('width', w).attr('height', h),
       svg = svgBase.append('g')
@@ -862,24 +856,21 @@ export class UsersComponent implements OnChanges {
     for (let i = 0, ij = 0; i < factorNames.length; ++i) {
       for (let j = 0; j <= i; ++j, ++ij) {
         if (i === j) {
-          plotFC.push({ i, j, correlation: 1 });
+          plotFC.push({ i: i, j: j, correlation: 1 });
         } else {
-          plotFC.push({ i, j, correlation: FC[ij] / sdI[i] / sdI[j] });
+          plotFC.push({ i: i, j: j, correlation: FC[ij] / sdI[i] / sdI[j] });
         }
       }
     }
     const margin = { top: 90, right: 140, bottom: 10, left: 10 };
-
     let width = w - margin.left - margin.right,
       height = h - margin.top - margin.bottom;
-
     const spacer = 10, rotateAngle = -45,
       squareSide = Math.min(width, height) / factorNames.length - spacer, Side = squareSide + spacer;
     width = (squareSide + spacer) * factorNames.length;
     height = (squareSide + spacer) * factorNames.length;
     w = width + margin.right + margin.left;
     h = height + margin.bottom + margin.top;
-
     const svgBase = d3.select(id).attr('class', 'main').append('svg')
       .attr('width', w).attr('height', h),
       svg = svgBase.append('g')
@@ -1091,10 +1082,8 @@ export class UsersComponent implements OnChanges {
     });
     */
     const margin = { top: 10, right: 10, bottom: 10, left: 10 };
-
     let width = w - margin.left - margin.right,
       height = h - margin.top - margin.bottom;
-
     const radiusL = Math.min(width, height) / 2, radiusS = radiusL / (1 + Math.sqrt(2)), extra = Math.PI * 0.25,
       ARC = useSquare ? this.squareArc : d3.arc();
     width = radiusL * 2, height = radiusL * 2,
@@ -1120,7 +1109,6 @@ export class UsersComponent implements OnChanges {
         if (i % 3 === 0) {
           soFar = 0;
         }
-
         const st = soFar, en = soFar + d.value / d.total;
         const back = ARC({ outerRadius: radiusS, innerRadius: radiusS * 0.9, startAngle: st * 2 * Math.PI, endAngle: en * 2 * Math.PI });
         soFar = en;
@@ -1128,7 +1116,6 @@ export class UsersComponent implements OnChanges {
       })
       .transition().duration(2000).ease(d3.easeCircle)
       .attrTween('transform', d => (t: number) => {
-
         const diam = radiusS * 2, t0 = (1 - t) * (1 - t), circ = -+d.id * 0.25 * t0 * Math.PI / 4 +
           t * Math.floor((+d.id - 1) / 3);
         const back = Math.floor((+d.id - 1) / 3) === 0 ?
@@ -1142,7 +1129,6 @@ export class UsersComponent implements OnChanges {
         if (i % 3 === 0) {
           soFar = 0;
         }
-
         const st = soFar, en = soFar + d.value / d.total;
         const back = ARCHh({ outerRadius: radiusS, innerRadius: radiusS * 0.9, startAngle: st * 2 * Math.PI, endAngle: en * 2 * Math.PI });
         soFar = en;
@@ -1170,7 +1156,6 @@ export class UsersComponent implements OnChanges {
       .style('opacity', 0)
       .attr('r', radiusS * 0.78)
       .attr('transform', d => {
-
         const circ = Math.floor((d.id - 1) / 3),
           back = circ === 0 ?
             `translate(0,0)` : `translate(${radiusS * 2 * Math.cos(Math.PI / 2 * circ + extra)},
@@ -1190,7 +1175,6 @@ export class UsersComponent implements OnChanges {
         .styleTween('fill-opacity', () => t => `${-t * (1 - t) * 4 + 1}`))
       .transition().duration(2000)
       .tween('transform', (dh, i, j) => t => {
-
         const here = j[i], down = 8;
         const circ = Math.floor((dh.id - 1) / 3);
         const back = circ === 0 ?
@@ -1215,14 +1199,12 @@ export class UsersComponent implements OnChanges {
   }
   fiveCircles(w = 960, h = 500, displayData = ['ZERO', 'ONE', 'TWO', 'THREE', 'FOUR'], id = 'app-users') {
     const margin = { top: 10, right: 10, bottom: 10, left: 10 };
-
     let width = w - margin.left - margin.right,
       height = h - margin.top - margin.bottom;
     const squareSide = Math.min(width, height);
     width = squareSide, height = squareSide,
       w = width + margin.left + margin.right;
     h = height + margin.bottom + margin.top;
-
     const svgBase = d3.select(id).attr('class', 'main').append('svg'), circleRad = squareSide / 6, root2 = Math.sqrt(2),
       spacer = (root2 * squareSide / 2 - 3 * circleRad) / 2 * root2,
       filler = d3.interpolateRgb('magenta', 'cyan');
@@ -1348,15 +1330,11 @@ export class UsersComponent implements OnChanges {
         .range([2 * Math.PI / 5 + Math.PI / 2, -2 * Math.PI / 5 + Math.PI / 2]);
       angScaleSeparate.push(aScale);
     });
-
     const labPad = 15, padRow = 5, numCol = 4, rotAng = 0;
-
     let width = wh * numCol, height = (wh + labPad * Math.floor(exposures.length / numCol)) * exposures.length / numCol;
-
     const mx = 40, my = 40,
       rad = Math.min((width - padRow * (numCol - 1)) / numCol, height - labPad * Math.floor(exposures.length / numCol));
     width = rad * numCol; height = (rad + (labPad + 1) * (exposures.length / numCol)) * exposures.length / numCol;
-
     const svg = d3.select(id).append('svg').attr('class', 'main')
       .attr('x', 0)
       .attr('y', 0)
@@ -1400,7 +1378,6 @@ export class UsersComponent implements OnChanges {
       .attr('transform', (d, i) => `translate(${mx + rad / 2 + (i % numCol) * (rad + padRow)},
       ${my + rad / 2 + Math.floor(i / numCol) * (rad + labPad)}) rotate(${rotAng})`)
       .attr('d', (d, iExp) => {
-
         const angle = angScaleSeparate[iExp](d.value), cc = (rad - th * 2) * Math.cos(angle), ss = (rad - th * 2) * Math.sin(angle);
         return `M${-rad / 2} 0l0 -${th}l${rad} 0l0 ${th}Z` + `M0 0l${th / 2} 0l${cc / 2} ${-ss / 2}l-${th} 0l${-cc / 2} ${ss / 2}Z`;
       }
@@ -1483,7 +1460,6 @@ export class UsersComponent implements OnChanges {
           let newVal = (iDialPart + 0.5) / (dialParts.length) * (angScaleSeparate[iExp].range()[1] -
             angScaleSeparate[iExp].range()[0]) + angScaleSeparate[iExp].range()[0];
           newVals[iExp] = +formatG(angScaleSeparate[iExp].invert(newVal));
-
           let xx: string, yy: string, trans: string;
           gaugeplate.selectAll('.newvals').each((dki, iii, jjj) => {
             if (iii === iExp) {
@@ -1518,11 +1494,9 @@ export class UsersComponent implements OnChanges {
             gaugeplate.selectAll('.meters')
               .attr('d', (df, iii, jjj) => {
                 const here1 = d3.select(jjj[iii]);
-
                 const old = here1.attr('d'), th1 = th / 5;
                 if (iii === iExp) {
                   const oldc = old.replace(/Z m.*/, 'Z').replace(/Zm.*/, 'Z');
-
                   const angle = angScaleSeparate[iExp](newVals[iExp]), cc = (rad * smallerRimScale - th * 2) * Math.cos(angle),
                     ss = (rad * smallerRimScale - th * 2) * Math.sin(angle);
                   return oldc + `m0 0M0 0l${th1 / 2} 0l${cc / 2} ${-ss / 2}l ${th1} 0l${-cc / 2} ${ss / 2}Z`;
@@ -1545,16 +1519,13 @@ export class UsersComponent implements OnChanges {
     return svg;
   }
   simpleDisplay(displayData: any, position = 0) {
-
     const keys = Object.keys(displayData[0]), www = keys.length;
     const facNames: string[] = displayData.map(d => d[keys[0]]);
     const longNameLength = d3.max(facNames, d => d.length);
-
     const xPosArray: number[] = Array(www), off = 20, ww = Math.max(0, off * 8 + www * longNameLength * 8);
     for (let i = 0; i < www; ++i) {
       xPosArray[i] = ((ww - off) / www * i);
     }
-
     const nDat = displayData.length,
       xPos = (f: number) => xPosArray[f],
       base = d3.select('app-users').append('svg').attr('width', ww).attr('height', (nDat + 1) * 21 + 30);
@@ -1593,7 +1564,7 @@ export class UsersComponent implements OnChanges {
       .attr('x', 5)
       .attr('y', 54)
       .attr('transform', (d, i) => `translate(${off},${i * 21})`)
-      .attr('lineindex', (d: { axis: string, value: number }) => d.axis)
+      .attr('lineindex', d => d['axis'])
       .attr('class', 'users')
       .attr('picId', position)
       .call(d => d.each((dd, i, j) => {// We have to do it like this with call() rather than html() to get the tspan on IE on Windows 7
@@ -1644,7 +1615,6 @@ export class UsersComponent implements OnChanges {
     }
     const maxValue = Math.max(cfg.maxValue, +d3.max(data, (i) => d3.max(i.map((o) => o.value))));
     const minValue = Math.min(cfg.maxValue, +d3.min(data, (i) => d3.min(i.map((o) => o.value))));
-
     const allAxis = (data[0].map((i) => i.axis)),	// Names of each axis
       total = allAxis.length,					// The number of different axes
       radius = Math.min(cfg.w, cfg.h) / 2, 	// Radius of the outermost circle
@@ -1657,7 +1627,6 @@ export class UsersComponent implements OnChanges {
     const rScale = d3.scaleLinear<number, number>()
       .range([0, radius])
       .domain([pMin, pMax]);
-
     const svg = d3.select(id).attr('class', 'main').append('svg'), doView = false;
     if (doView) {
       svg.attr('viewBox', `0 0 ${cfg.w + cfg.margin.left + cfg.margin.right} ${cfg.h + cfg.margin.top + cfg.margin.bottom}`)
@@ -1670,7 +1639,6 @@ export class UsersComponent implements OnChanges {
         .attr('y', 0)
         .attr('class', 'radar' + id);
     }
-
     const baseSvg = svg.append('g')
       .attr('transform', 'translate(' + (cfg.w / 2 + cfg.margin.left) + ',' + (cfg.h / 2 + cfg.margin.top) + ')'),
       filter = baseSvg.append('defs').append('filter').attr('id', 'glow'),
@@ -1828,7 +1796,7 @@ export class UsersComponent implements OnChanges {
       .style('pointer-events', 'all')
       .on('mouseover', (d, i, j) => {
         const ppp: d3.CustomEventParameters | MouseEvent = d3.event;
-        const dataId = (<SVGGElement>(j[i]).parentNode).getAttribute('data-index');
+        const dataId = ((j[i]).parentNode as SVGGElement).getAttribute('data-index');
         console.log(isObject(ppp.detail), ppp);
         if (!isObject(ppp.detail)) {
           d3.select('app-users').selectAll('rect.totals').each((tt, ii,
@@ -1853,7 +1821,6 @@ export class UsersComponent implements OnChanges {
           });
           ['rect.weightSinglePlus', 'rect.weightSingleMinus', 'text.users'].forEach(ss => {
             d3.select('app-users').selectAll(ss).classed('over', (tt, ii,
-              // tslint:disable-next-line:max-line-length
               jj: SVGTextElement[] | SVGRectElement[] | d3.ArrayLike<SVGTextElement> | d3.ArrayLike<SVGRectElement>) =>
               (jj[ii].getAttribute('lineindex') === d.axis && jj[ii].getAttribute('picId') === dataId) ? true : false
             );
@@ -1866,7 +1833,7 @@ export class UsersComponent implements OnChanges {
           .style('opacity', 1)
           .text(percentFormat(+d.value))
           .transition().duration(200)
-          .style('fill', (j[i]).style.fill);
+          .style('fill', (j[i]).style['fill']);
       })
       .on('mouseout', () => {
         d3.select('app-users').selectAll('rect.totals').classed('select', false);
@@ -1919,19 +1886,16 @@ export class UsersComponent implements OnChanges {
       .style('opacity', 0);
   }
   wrapFunction = (text1: any, width: number, lineHeight: number) =>  // Adapted from http://bl.ocks.org/mbostock/7555321
-    // tslint:disable-next-line:variable-name
-    text1.each((_kk, i, j) => {
-
+    text1.each((_KK, i, j) => {
       const text = d3.select(j[i]),
         words = text.text().split(/\s+/).reverse(),
         y = text.attr('y'),
         x = text.attr('x'),
         dy = parseFloat(text.attr('dy'));
-
-      let word = words.pop(), line = [],
+      let word, line = [],
         lineNumber = 0,
         tspan = text.text(null).append('tspan').attr('x', x).attr('y', y).attr('dy', dy + 'em');
-      while (word) {
+      while (word = words.pop()) {
         line.push(word);
         tspan.text(line.join(' '));
         if ((tspan.node() as SVGTSpanElement).getComputedTextLength() > width) {
@@ -1940,18 +1904,15 @@ export class UsersComponent implements OnChanges {
           line = [word];
           tspan = text.append('tspan').attr('x', x).attr('y', y).attr('dy', ++lineNumber * lineHeight + dy + 'em').text(word);
         }
-        word = words.pop();
       }
     })
   stockbars = (DATA: { axis: string, value: number, alpha: number }[], dataIndex: number, ww: number, hh: number,
     durationtime: number, xText = 'Weight', yText = 'Class') => {
-
     const svg = d3.select('app-users').append('svg')
       .attr('width', ww)
       .attr('height', hh).attr('class', 'stockbars').append('g'),
       chart = svg.append('g'),
       scaleAll = 1;
-
     const margin = {
       top: 50 * scaleAll,
       right: 50 * scaleAll,
@@ -1984,7 +1945,6 @@ export class UsersComponent implements OnChanges {
     svg.attr('transform', `translate(${margin.left}, ${margin.top})`);
     x.domain(DATA.map(d => d.axis)).padding(0.1);
     xx.domain(DATA.map(d => d.axis)).padding(0.1);
-
     const yAxis = d3.axisLeft(y).ticks(2)
       , svgX = svg.append('g').attr('transform', `translate(0, ${height})`).attr('class', 'axis').call(customXAxis)
       , svgY = svg.append('g').attr('transform', 'translate(0,0)').attr('class', 'axis').call(yAxis)
