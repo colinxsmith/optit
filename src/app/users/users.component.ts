@@ -452,7 +452,7 @@ export class UsersComponent implements OnChanges {
               }
             });
           }
-          // tslint:disable-next-line:one-variable-per-declaration
+
           const ww = 500, hh = 500, margin = { top: hh / 8, right: ww / 8, bottom: hh / 8, left: ww / 8 },
             width = ww - margin.left - margin.right,
             height = hh - margin.top - margin.bottom,
@@ -476,7 +476,7 @@ export class UsersComponent implements OnChanges {
               }
             });
           }
-          // tslint:disable-next-line:one-variable-per-declaration
+
           const ww = 500, hh = 500, margin = { top: hh / 8, right: ww / 8, bottom: hh / 8, left: ww / 8 },
             width = ww - margin.left - margin.right,
             height = hh - margin.top - margin.bottom,
@@ -535,7 +535,7 @@ export class UsersComponent implements OnChanges {
           const FC: number[] = this.displayData[0].FC;
           const factorsOff = this.displayData.length === 2 ? this.displayData[1].factors : this.displayData[0].factors;
           const svgFactorX = this.factorX(factorsOff, 200);
-          // tslint:disable-next-line:one-variable-per-declaration
+
           const margin = { top: 40, right: 40, bottom: 40, left: 40 }, ww = 400, hh = 400,
             width = ww - margin.left - margin.right,
             height = hh - margin.top - margin.bottom,
@@ -622,13 +622,13 @@ export class UsersComponent implements OnChanges {
   }
   matrixFLorFX(dataIndex: number, weights: { w: number, name: string }[],
     factorBetas: number[], fNames: string[], totals = 0, w = 960, h = 960, id = 'app-users') {
-    // tslint:disable-next-line:one-variable-per-declaration
+
     const nRow = weights.length + totals, nfac = factorBetas.length / weights.length, nCol = nfac + totals,
       margin = { top: 250, right: 10, bottom: 10, left: 100 };
-    // tslint:disable-next-line:one-variable-per-declaration
+
     let width = w - margin.left - margin.right,
       height = h - margin.top - margin.bottom;
-    // tslint:disable-next-line:one-variable-per-declaration
+
     const spacer = 10, rotateAngle = -45,
       squareSide = Math.min(width / nCol, height / nRow) - spacer, Side = squareSide + spacer;
     height = (squareSide + spacer) * nRow;
@@ -644,7 +644,7 @@ export class UsersComponent implements OnChanges {
       totalsCol[Math.floor(i / weights.length)] += d;
       sumEx += d;
     });
-    // tslint:disable-next-line:one-variable-per-declaration
+
     const svgBase = d3.select(id).attr('class', 'main').append('svg')
       .attr('width', w).attr('height', h),
       svg = svgBase.append('g')
@@ -871,17 +871,17 @@ export class UsersComponent implements OnChanges {
       }
     }
     const margin = { top: 90, right: 140, bottom: 10, left: 10 };
-    // tslint:disable-next-line:one-variable-per-declaration
+
     let width = w - margin.left - margin.right,
       height = h - margin.top - margin.bottom;
-    // tslint:disable-next-line:one-variable-per-declaration
+
     const spacer = 10, rotateAngle = -45,
       squareSide = Math.min(width, height) / factorNames.length - spacer, Side = squareSide + spacer;
     width = (squareSide + spacer) * factorNames.length;
     height = (squareSide + spacer) * factorNames.length;
     w = width + margin.right + margin.left;
     h = height + margin.bottom + margin.top;
-    // tslint:disable-next-line:one-variable-per-declaration
+
     const svgBase = d3.select(id).attr('class', 'main').append('svg')
       .attr('width', w).attr('height', h),
       svg = svgBase.append('g')
@@ -1093,10 +1093,10 @@ export class UsersComponent implements OnChanges {
     });
     */
     const margin = { top: 10, right: 10, bottom: 10, left: 10 };
-    // tslint:disable-next-line:one-variable-per-declaration
+
     let width = w - margin.left - margin.right,
       height = h - margin.top - margin.bottom;
-    // tslint:disable-next-line:one-variable-per-declaration
+
     const radiusL = Math.min(width, height) / 2, radiusS = radiusL / (1 + Math.sqrt(2)), extra = Math.PI * 0.25,
       ARC = useSquare ? this.squareArc : d3.arc();
     width = radiusL * 2, height = radiusL * 2,
@@ -1122,7 +1122,7 @@ export class UsersComponent implements OnChanges {
         if (i % 3 === 0) {
           soFar = 0;
         }
-        // tslint:disable-next-line:one-variable-per-declaration
+
         const st = soFar, en = soFar + d.value / d.total;
         const back = ARC({ outerRadius: radiusS, innerRadius: radiusS * 0.9, startAngle: st * 2 * Math.PI, endAngle: en * 2 * Math.PI });
         soFar = en;
@@ -1130,7 +1130,7 @@ export class UsersComponent implements OnChanges {
       })
       .transition().duration(2000).ease(d3.easeCircle)
       .attrTween('transform', d => (t: number) => {
-        // tslint:disable-next-line:one-variable-per-declaration
+
         const diam = radiusS * 2, t0 = (1 - t) * (1 - t), circ = -+d.id * 0.25 * t0 * Math.PI / 4 +
           t * Math.floor((+d.id - 1) / 3);
         const back = Math.floor((+d.id - 1) / 3) === 0 ?
@@ -1144,7 +1144,7 @@ export class UsersComponent implements OnChanges {
         if (i % 3 === 0) {
           soFar = 0;
         }
-        // tslint:disable-next-line:one-variable-per-declaration
+
         const st = soFar, en = soFar + d.value / d.total;
         const back = ARCHh({ outerRadius: radiusS, innerRadius: radiusS * 0.9, startAngle: st * 2 * Math.PI, endAngle: en * 2 * Math.PI });
         soFar = en;
@@ -1172,7 +1172,7 @@ export class UsersComponent implements OnChanges {
       .style('opacity', 0)
       .attr('r', radiusS * 0.78)
       .attr('transform', d => {
-        // tslint:disable-next-line:one-variable-per-declaration
+
         const circ = Math.floor((d.id - 1) / 3),
           back = circ === 0 ?
             `translate(0,0)` : `translate(${radiusS * 2 * Math.cos(Math.PI / 2 * circ + extra)},
@@ -1192,7 +1192,7 @@ export class UsersComponent implements OnChanges {
         .styleTween('fill-opacity', () => t => `${-t * (1 - t) * 4 + 1}`))
       .transition().duration(2000)
       .tween('transform', (dh, i, j) => t => {
-        // tslint:disable-next-line:one-variable-per-declaration
+
         const here = j[i], down = 8;
         const circ = Math.floor((dh.id - 1) / 3);
         const back = circ === 0 ?
@@ -1217,14 +1217,14 @@ export class UsersComponent implements OnChanges {
   }
   fiveCircles(w = 960, h = 500, displayData = ['ZERO', 'ONE', 'TWO', 'THREE', 'FOUR'], id = 'app-users') {
     const margin = { top: 10, right: 10, bottom: 10, left: 10 };
-    // tslint:disable-next-line:one-variable-per-declaration
+
     let width = w - margin.left - margin.right,
       height = h - margin.top - margin.bottom;
     const squareSide = Math.min(width, height);
     width = squareSide, height = squareSide,
       w = width + margin.left + margin.right;
     h = height + margin.bottom + margin.top;
-    // tslint:disable-next-line:one-variable-per-declaration
+
     const svgBase = d3.select(id).attr('class', 'main').append('svg'), circleRad = squareSide / 6, root2 = Math.sqrt(2),
       spacer = (root2 * squareSide / 2 - 3 * circleRad) / 2 * root2,
       filler = d3.interpolateRgb('magenta', 'cyan');
@@ -1350,15 +1350,15 @@ export class UsersComponent implements OnChanges {
         .range([2 * Math.PI / 5 + Math.PI / 2, -2 * Math.PI / 5 + Math.PI / 2]);
       angScaleSeparate.push(aScale);
     });
-    // tslint:disable-next-line:one-variable-per-declaration
+
     const labPad = 15, padRow = 5, numCol = 4, rotAng = 0;
-    // tslint:disable-next-line:one-variable-per-declaration
+
     let width = wh * numCol, height = (wh + labPad * Math.floor(exposures.length / numCol)) * exposures.length / numCol;
-    // tslint:disable-next-line:one-variable-per-declaration
+
     const mx = 40, my = 40,
       rad = Math.min((width - padRow * (numCol - 1)) / numCol, height - labPad * Math.floor(exposures.length / numCol));
     width = rad * numCol; height = (rad + (labPad + 1) * (exposures.length / numCol)) * exposures.length / numCol;
-    // tslint:disable-next-line:one-variable-per-declaration
+
     const svg = d3.select(id).append('svg').attr('class', 'main')
       .attr('x', 0)
       .attr('y', 0)
@@ -1402,7 +1402,7 @@ export class UsersComponent implements OnChanges {
       .attr('transform', (d, i) => `translate(${mx + rad / 2 + (i % numCol) * (rad + padRow)},
       ${my + rad / 2 + Math.floor(i / numCol) * (rad + labPad)}) rotate(${rotAng})`)
       .attr('d', (d, iExp) => {
-        // tslint:disable-next-line:one-variable-per-declaration
+
         const angle = angScaleSeparate[iExp](d.value), cc = (rad - th * 2) * Math.cos(angle), ss = (rad - th * 2) * Math.sin(angle);
         return `M${-rad / 2} 0l0 -${th}l${rad} 0l0 ${th}Z` + `M0 0l${th / 2} 0l${cc / 2} ${-ss / 2}l-${th} 0l${-cc / 2} ${ss / 2}Z`;
       }
@@ -1485,7 +1485,7 @@ export class UsersComponent implements OnChanges {
           let newVal = (iDialPart + 0.5) / (dialParts.length) * (angScaleSeparate[iExp].range()[1] -
             angScaleSeparate[iExp].range()[0]) + angScaleSeparate[iExp].range()[0];
           newVals[iExp] = +formatG(angScaleSeparate[iExp].invert(newVal));
-          // tslint:disable-next-line:one-variable-per-declaration
+
           let xx: string, yy: string, trans: string;
           gaugeplate.selectAll('.newvals').each((dki, iii, jjj) => {
             if (iii === iExp) {
@@ -1520,11 +1520,11 @@ export class UsersComponent implements OnChanges {
             gaugeplate.selectAll('.meters')
               .attr('d', (df, iii, jjj) => {
                 const here1 = d3.select(jjj[iii]);
-                // tslint:disable-next-line:one-variable-per-declaration
+
                 const old = here1.attr('d'), th1 = th / 5;
                 if (iii === iExp) {
                   const oldc = old.replace(/Z m.*/, 'Z').replace(/Zm.*/, 'Z');
-                  // tslint:disable-next-line:one-variable-per-declaration
+
                   const angle = angScaleSeparate[iExp](newVals[iExp]), cc = (rad * smallerRimScale - th * 2) * Math.cos(angle),
                     ss = (rad * smallerRimScale - th * 2) * Math.sin(angle);
                   return oldc + `m0 0M0 0l${th1 / 2} 0l${cc / 2} ${-ss / 2}l ${th1} 0l${-cc / 2} ${ss / 2}Z`;
@@ -1547,16 +1547,16 @@ export class UsersComponent implements OnChanges {
     return svg;
   }
   simpleDisplay(displayData: any, position = 0) {
-    // tslint:disable-next-line:one-variable-per-declaration
+
     const keys = Object.keys(displayData[0]), www = keys.length;
     const facNames: string[] = displayData.map(d => d[keys[0]]);
     const longNameLength = d3.max(facNames, d => d.length);
-    // tslint:disable-next-line:one-variable-per-declaration
+
     const xPosArray: number[] = Array(www), off = 20, ww = Math.max(0, off * 8 + www * longNameLength * 8);
     for (let i = 0; i < www; ++i) {
       xPosArray[i] = ((ww - off) / www * i);
     }
-    // tslint:disable-next-line:one-variable-per-declaration
+
     const nDat = displayData.length,
       xPos = (f: number) => xPosArray[f],
       base = d3.select('app-users').append('svg').attr('width', ww).attr('height', (nDat + 1) * 21 + 30);
@@ -1646,7 +1646,7 @@ export class UsersComponent implements OnChanges {
     }
     const maxValue = Math.max(cfg.maxValue, +d3.max(data, (i) => d3.max(i.map((o) => o.value))));
     const minValue = Math.min(cfg.maxValue, +d3.min(data, (i) => d3.min(i.map((o) => o.value))));
-    // tslint:disable-next-line:one-variable-per-declaration
+
     const allAxis = (data[0].map((i) => i.axis)),	// Names of each axis
       total = allAxis.length,					// The number of different axes
       radius = Math.min(cfg.w, cfg.h) / 2, 	// Radius of the outermost circle
@@ -1659,7 +1659,7 @@ export class UsersComponent implements OnChanges {
     const rScale = d3.scaleLinear<number, number>()
       .range([0, radius])
       .domain([pMin, pMax]);
-    // tslint:disable-next-line:one-variable-per-declaration
+
     const svg = d3.select(id).attr('class', 'main').append('svg'), doView = false;
     if (doView) {
       svg.attr('viewBox', `0 0 ${cfg.w + cfg.margin.left + cfg.margin.right} ${cfg.h + cfg.margin.top + cfg.margin.bottom}`)
@@ -1672,7 +1672,7 @@ export class UsersComponent implements OnChanges {
         .attr('y', 0)
         .attr('class', 'radar' + id);
     }
-    // tslint:disable-next-line:one-variable-per-declaration
+
     const baseSvg = svg.append('g')
       .attr('transform', 'translate(' + (cfg.w / 2 + cfg.margin.left) + ',' + (cfg.h / 2 + cfg.margin.top) + ')'),
       filter = baseSvg.append('defs').append('filter').attr('id', 'glow'),
@@ -1830,7 +1830,7 @@ export class UsersComponent implements OnChanges {
       .style('pointer-events', 'all')
       .on('mouseover', (d, i, j) => {
         const ppp: d3.CustomEventParameters | MouseEvent = d3.event;
-        const dataId = ((j[i]).parentNode as SVGGElement).getAttribute('data-index');
+        const dataId = (<SVGGElement>(j[i]).parentNode).getAttribute('data-index');
         console.log(isObject(ppp.detail), ppp);
         if (!isObject(ppp.detail)) {
           d3.select('app-users').selectAll('rect.totals').each((tt, ii,
@@ -1923,13 +1923,13 @@ export class UsersComponent implements OnChanges {
   wrapFunction = (text1: any, width: number, lineHeight: number) =>  // Adapted from http://bl.ocks.org/mbostock/7555321
     // tslint:disable-next-line:variable-name
     text1.each((_kk, i, j) => {
-      // tslint:disable-next-line:one-variable-per-declaration
+
       const text = d3.select(j[i]),
         words = text.text().split(/\s+/).reverse(),
         y = text.attr('y'),
         x = text.attr('x'),
         dy = parseFloat(text.attr('dy'));
-      // tslint:disable-next-line:one-variable-per-declaration
+
       let word = words.pop(), line = [],
         lineNumber = 0,
         tspan = text.text(null).append('tspan').attr('x', x).attr('y', y).attr('dy', dy + 'em');
@@ -1947,13 +1947,13 @@ export class UsersComponent implements OnChanges {
     })
   stockbars = (DATA: { axis: string, value: number, alpha: number }[], dataIndex: number, ww: number, hh: number,
     durationtime: number, xText = 'Weight', yText = 'Class') => {
-    // tslint:disable-next-line:one-variable-per-declaration
+
     const svg = d3.select('app-users').append('svg')
       .attr('width', ww)
       .attr('height', hh).attr('class', 'stockbars').append('g'),
       chart = svg.append('g'),
       scaleAll = 1;
-    // tslint:disable-next-line:one-variable-per-declaration
+
     const margin = {
       top: 50 * scaleAll,
       right: 50 * scaleAll,
@@ -1986,7 +1986,7 @@ export class UsersComponent implements OnChanges {
     svg.attr('transform', `translate(${margin.left}, ${margin.top})`);
     x.domain(DATA.map(d => d.axis)).padding(0.1);
     xx.domain(DATA.map(d => d.axis)).padding(0.1);
-    // tslint:disable-next-line:one-variable-per-declaration
+
     const yAxis = d3.axisLeft(y).ticks(2)
       , svgX = svg.append('g').attr('transform', `translate(0, ${height})`).attr('class', 'axis').call(customXAxis)
       , svgY = svg.append('g').attr('transform', 'translate(0,0)').attr('class', 'axis').call(yAxis)
